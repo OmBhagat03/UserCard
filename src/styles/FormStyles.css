@@ -1,11 +1,11 @@
 .form-container {
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: black;
   margin: 20px auto;
-  max-width: 500px;
+  max-width: 1200px;
   padding: 30px;
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;

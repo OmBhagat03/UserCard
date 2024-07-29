@@ -16,7 +16,7 @@ const Register = () => {
     const { uname, uemail, uphone, upassword } = formData;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\d{10}$/;
-    if (uname.length < 2) return 'Username must be at least 2 characters long.';
+    if (uname.trim().length < 2) return 'Username must be at least 2 characters long.';
     if (!emailRegex.test(uemail)) return 'Invalid email format.';
     if (!phoneRegex.test(uphone)) return 'Phone number must be 10 digits.';
     if (upassword.length < 6) return 'Password must be at least 6 characters long.';
@@ -38,7 +38,7 @@ const Register = () => {
       const phoneExists = userData.some((user) => user.uphone === uphone);
       const userExists = userData.some((user) => user.uname === uname);
       if (emailExists || phoneExists || userExists) {
-        toast.error('Name or Email or phone number already exists.');
+        toast.error('Name, Email, or phone number already exists.');
         return;
       }
       const updatedUserData = [...userData, newUserData];
@@ -46,6 +46,12 @@ const Register = () => {
       localStorage.setItem('userData', JSON.stringify(updatedUserData));
       toast.success('Registration successful!');
     } else {
+      const emailExists = userData.some((user, idx) => user.uemail === uemail && idx !== Number(index));
+      const phoneExists = userData.some((user, idx) => user.uphone === uphone && idx !== Number(index));
+      if (emailExists || phoneExists) {
+        toast.error('Email or phone number already exists.');
+        return;
+      }
       const updatedUserData = userData.map((user, idx) =>
         idx === Number(index) ? newUserData : user
       );
