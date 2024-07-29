@@ -36,8 +36,9 @@ const Register = () => {
     if (index === '') {
       const emailExists = userData.some((user) => user.uemail === uemail);
       const phoneExists = userData.some((user) => user.uphone === uphone);
-      if (emailExists || phoneExists) {
-        toast.error('Email or phone number already exists.');
+      const userExists = userData.some((user) => user.uname === uname);
+      if (emailExists || phoneExists || userExists) {
+        toast.error('Name or Email or phone number already exists.');
         return;
       }
       const updatedUserData = [...userData, newUserData];
